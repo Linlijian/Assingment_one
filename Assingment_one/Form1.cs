@@ -141,5 +141,46 @@ namespace Assingment_one
 
             pictureBox2.Image = image;
         }
+
+        private void a()
+        {
+            int a = 2^3;
+
+            textBox1.Text = a.ToString();
+        }
+
+        //POW_LAW
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int c = 0;
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+
+                    c = (int)(Math.Abs(C_gray - Math.Pow(C_gray, 2)));
+                    //c = (int)(1*Math.Log(1 + C_gray));
+
+                    if (c >= 255)
+                        c = 255;
+
+                     image.SetPixel(i, j, Color.FromArgb(c, c, c));
+                    
+                }
+            }
+
+            textBox1.Text = c.ToString();
+            pictureBox2.Image = image;
+
+         
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
