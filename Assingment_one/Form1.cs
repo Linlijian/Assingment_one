@@ -88,5 +88,58 @@ namespace Assingment_one
             }
             pictureBox2.Image = image;
         }
+
+        private void ContrastStretching_Click(object sender, EventArgs e)
+        {
+            //search min.max
+            int max = 0;
+            int min = 255;
+            int R = 0;
+            int p = 0;
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    if (C_gray > max)
+                    {
+                        max = C_gray;
+                    }
+                    else if (C_gray < min)
+                    {
+                        min = C_gray;
+                    }
+
+                }
+            }
+            R = max - min;
+
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    if (C_gray <= min)
+                    {
+                        image.SetPixel(i, j, Color.FromArgb(0, 0, 0));
+                    }
+                    else if (C_gray >= max)
+                    {
+                        image.SetPixel(i, j, Color.FromArgb(max, max, max));
+                    }
+                    else
+                    {
+                        p = 255 * (C_gray - min) / R;
+                        image.SetPixel(i, j, Color.FromArgb(p, p, p));
+                    }
+                }
+            }
+
+            pictureBox2.Image = image;
+        }
     }
 }
