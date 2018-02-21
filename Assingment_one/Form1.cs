@@ -42,6 +42,7 @@ namespace Assingment_one
 
 
             pictureBox1.Image = f_image;
+            chart(f_image, 2);
         }
 
         private void Thresholding_Click(object sender, EventArgs e)
@@ -87,6 +88,10 @@ namespace Assingment_one
                 }
             }
             pictureBox2.Image = image;
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image,1);
+            chart(f_image,2);
         }
 
         private void ContrastStretching_Click(object sender, EventArgs e)
@@ -140,6 +145,10 @@ namespace Assingment_one
             }
 
             pictureBox2.Image = image;
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image,1);
+            chart(f_image,2);
         }
 
         private void a()
@@ -174,12 +183,70 @@ namespace Assingment_one
 
             textBox1.Text = c.ToString();
             pictureBox2.Image = image;
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image,1);
+            chart(f_image,2);
 
-         
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void HIT_Click(object sender, EventArgs e)
+        {
+            chart(image,1);
+
+
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            chart1.Series["Series1"].Points.AddXY("a", 25);
+            chart1.Series["Series1"].Points.AddXY("4111", 31);
+            chart1.Series["Series1"].Points.AddXY("r", 31);
+        }
+
+        public void chart(Bitmap image,int c)
+        {
+            int[] arrCo = new int[255];
+            int[] arrNco = new int[255];
+
+            for (int i = 0; i < image.Width; i++)
+            {
+                for (int j = 0; j < image.Height; j++)
+                {
+
+                    Color PixelColor = image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    if (C_gray >= 254)
+                        C_gray = 254;
+                    arrCo[C_gray] += 1;
+
+                }
+            }
+            if (c == 1)
+            {
+                for (int i = 0; i < arrCo.Length; i++)
+                {
+                    this.chart1.Series["Series1"].Points.AddXY(i, arrCo[i]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < arrCo.Length; i++)
+                {
+                    this.chart2.Series["Series1"].Points.AddXY(i, arrCo[i]);
+                }
+            }
+           // this.chart1.Series["Series1"].Points.Clear();
+           // this.chart2.Series["Series1"].Points.Clear();
+            arrCo = null;
+            arrNco = null;
 
         }
     }
