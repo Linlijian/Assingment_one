@@ -153,9 +153,13 @@ namespace Assingment_one
 
         private void a()
         {
-            int a = 2^3;
-
-            textBox1.Text = a.ToString();
+            int a1 = 4;
+            double aa = 5;
+            
+            double a = (a1 / aa);
+            textBox2.Text = a.ToString();
+            int q = (int)(Math.Round(a, MidpointRounding.AwayFromZero));
+            textBox1.Text = q.ToString();
         }
 
         //POW_LAW
@@ -198,14 +202,70 @@ namespace Assingment_one
 
         private void HIT_Click(object sender, EventArgs e)
         {
-            chart(image,1);
+
+            int[] arrCo = new int[255];
+            double[] arrNco = new double[255];
+
+            double a = 0;
+            double max = f_image.Width * f_image.Height;
+
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    if (C_gray >= 254)
+                        C_gray = 254;
+                    arrCo[C_gray] += 1;
+
+                }
+            }
+
+            for (int i = 0; i < arrCo.Length; i++)
+            {
+                if(i!=0)
+                    arrCo[i] = arrCo[i] + arrCo[i-1];
+            }
+
+            for (int i = 0; i < arrCo.Length; i++)
+            {
+                arrNco[i] = (arrCo[i] / max) * 255;
+            }
+
+            for (int i = 0; i < arrNco.Length; i++)
+            {
+                arrCo[i] = (int)(Math.Round(arrNco[i], MidpointRounding.AwayFromZero));
+            }
 
 
+            for (int i = 0; i < arrCo.Length; i++)
+            {
+                this.chart1.Series["Series1"].Points.AddXY(i, arrCo[i]);
+            }
 
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    image.SetPixel(i, j, Color.FromArgb(arrCo[C_gray], arrCo[C_gray], arrCo[C_gray]));
+
+                }
+            }
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image, 1);
+            chart(f_image, 2);
+            pictureBox2.Image = image;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            a();
             chart1.Series["Series1"].Points.AddXY("a", 25);
             chart1.Series["Series1"].Points.AddXY("4111", 31);
             chart1.Series["Series1"].Points.AddXY("r", 31);
