@@ -14,6 +14,8 @@ namespace Assingment_one
     {
         private Bitmap f_image = null;  //input image
         public Bitmap image;       //output image
+        public Bitmap tmp_image;       //output image
+
         public Form1()
         {
             InitializeComponent();
@@ -39,6 +41,7 @@ namespace Assingment_one
                 }
             }
             image = new Bitmap(f_image.Width, f_image.Height);
+            tmp_image = new Bitmap(f_image.Width, f_image.Height);
 
 
             pictureBox1.Image = f_image;
@@ -151,15 +154,40 @@ namespace Assingment_one
             chart(f_image,2);
         }
 
-        private void a()
+        private void a(Bitmap imgage,int r)
         {
-            int a1 = 4;
-            double aa = 5;
+
             
-            double a = (a1 / aa);
-            textBox2.Text = a.ToString();
-            int q = (int)(Math.Round(a, MidpointRounding.AwayFromZero));
-            textBox1.Text = q.ToString();
+
+            //int L = f_image.Width * f_image.Height;
+            // int[] arrCo = new int[L+1];
+            // int[] arrNco = new int[L+1];
+            // int xy = 0;
+            // int sin = 1, cos = 0;
+            //y==i;
+            //x==j;
+            
+            
+                for (int y = 0; y < f_image.Width; y++)
+                {
+                    for (int x = 0; x < f_image.Height; x++)
+                    {
+
+                        Color PixelColor = f_image.GetPixel(y, x);
+                        int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                        // arrCo[xy] = C_gray;
+                        imgage.SetPixel(x, y, Color.FromArgb(C_gray, C_gray, C_gray));
+                        // image.SetPixel(i, j, Color.FromArgb(0, 0, 0));
+                        //xy++;
+                    }
+                }
+            
+           
+            
+           
+            pictureBox2.Image = imgage;
+            
+
         }
 
         //POW_LAW
@@ -174,7 +202,7 @@ namespace Assingment_one
                     Color PixelColor = f_image.GetPixel(i, j);
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
 
-                    c = (int)(Math.Abs(C_gray - Math.Pow(C_gray, 2)));
+                    c = (int)(Math.Abs(C_gray - Math.Pow(C_gray, 1.5)));
                     //c = (int)(1*Math.Log(1 + C_gray));
 
                     if (c >= 255)
@@ -262,13 +290,12 @@ namespace Assingment_one
             chart(f_image, 2);
             pictureBox2.Image = image;
         }
-
+        int rr = 1;
         private void button1_Click_1(object sender, EventArgs e)
         {
-            a();
-            chart1.Series["Series1"].Points.AddXY("a", 25);
-            chart1.Series["Series1"].Points.AddXY("4111", 31);
-            chart1.Series["Series1"].Points.AddXY("r", 31);
+            
+            a(image,rr);
+            rr+=1;
         }
 
         public void chart(Bitmap image,int c)
