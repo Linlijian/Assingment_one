@@ -48,6 +48,8 @@ namespace Assingment_one
             chart(f_image, 2);
         }
 
+
+        //Thresholding
         private void Thresholding_Click(object sender, EventArgs e)
         {
             //threshold
@@ -154,40 +156,50 @@ namespace Assingment_one
             chart(f_image,2);
         }
 
-        private void a(Bitmap imgage,int r)
+        private void Vertical()
         {
 
-            
+            int[,] arr = new int[f_image.Height, f_image.Width];
+            int x, y = 0;
 
-            //int L = f_image.Width * f_image.Height;
-            // int[] arrCo = new int[L+1];
-            // int[] arrNco = new int[L+1];
-            // int xy = 0;
-            // int sin = 1, cos = 0;
-            //y==i;
-            //x==j;
-            
-            
-                for (int y = 0; y < f_image.Width; y++)
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
                 {
-                    for (int x = 0; x < f_image.Height; x++)
-                    {
 
-                        Color PixelColor = f_image.GetPixel(y, x);
-                        int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
-                        // arrCo[xy] = C_gray;
-                        imgage.SetPixel(x, y, Color.FromArgb(C_gray, C_gray, C_gray));
-                        // image.SetPixel(i, j, Color.FromArgb(0, 0, 0));
-                        //xy++;
-                    }
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    y = (-i * 1) + (j * 0);
+                    x = (i * 0) + (j * 1);
+                    y = (f_image.Width-1) + y;
+                    arr[y, x] = C_gray;
+
+                    //image.SetPixel(i, j, Color.FromArgb(c, c, c));
+
                 }
-            
-           
-            
-           
-            pictureBox2.Image = imgage;
-            
+            }
 
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+
+
+
+
+
+                    image.SetPixel(i, j, Color.FromArgb(arr[i, j], arr[i, j], arr[i, j]));
+
+                }
+                          
+
+            }
+            pictureBox2.Image = image;
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image, 1);
+            chart(f_image, 2);
         }
 
         //POW_LAW
@@ -293,10 +305,108 @@ namespace Assingment_one
         int rr = 1;
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
-            a(image,rr);
-            rr+=1;
+
+
+            //Vertical();
+            //Rotation270();
+            Rotation90();
+            //aaa();
+            rr +=1;
         }
+
+        public void Rotation90()
+        {
+
+            int[,] arr = new int[f_image.Height, f_image.Width];
+            int x, y = 0;
+
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    y = (i * 1) + (j * 0);
+                    x = (i * 0) + (-j * 1);
+                   // y = (f_image.Width - 1) + y;
+                    x = (f_image.Width - 1) + x;
+                    arr[x, y] = C_gray;
+
+                    //image.SetPixel(i, j, Color.FromArgb(c, c, c));
+
+                }
+            }
+
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+
+
+
+
+                    image.SetPixel(i, j, Color.FromArgb(arr[i, j], arr[i, j], arr[i, j]));
+                    //image.SetPixel(i, j, Color.FromArgb(arr[j, i], arr[j, i], arr[j, i]));
+
+                }
+
+
+            }
+            pictureBox2.Image = image;
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image, 1);
+            chart(f_image, 2);
+        }
+
+        public void Rotation270()
+        {
+
+            int[,] arr = new int[f_image.Height, f_image.Width];
+            int x, y = 0;
+
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    y = (-i * 1) + (j * 0);
+                    x = (i * 0) + (j * 1);
+                    y = (f_image.Width - 1) + y;
+                    arr[y, x] = C_gray;
+
+                    //image.SetPixel(i, j, Color.FromArgb(c, c, c));
+
+                }
+            }
+
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+
+
+
+
+
+                    image.SetPixel(i, j, Color.FromArgb(arr[j, i], arr[j, i], arr[j, i]));
+
+                }
+
+
+            }
+            pictureBox2.Image = image;
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image, 1);
+            chart(f_image, 2);
+        }
+
 
         public void chart(Bitmap image,int c)
         {
@@ -335,6 +445,34 @@ namespace Assingment_one
             arrCo = null;
             arrNco = null;
 
+        }
+        public void aaa()
+        {
+
+            for (int y = 0; y < f_image.Width; y++)
+            {
+                for (int x = 0; x < f_image.Height; x++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(y, x);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    // arrCo[xy] = C_gray;
+                    image.SetPixel(x, y, Color.FromArgb(C_gray, C_gray, C_gray));
+                    // image.SetPixel(i, j, Color.FromArgb(0, 0, 0));
+                    //xy++;
+                }
+            }
+            pictureBox2.Image = image;
+        }
+
+        private void ro90_Click(object sender, EventArgs e)
+        {
+            Rotation90();
+        }
+
+        private void ro270_Click(object sender, EventArgs e)
+        {
+            Rotation270();
         }
     }
 }
