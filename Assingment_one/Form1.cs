@@ -95,8 +95,8 @@ namespace Assingment_one
             pictureBox2.Image = image;
             this.chart1.Series["Series1"].Points.Clear();
             this.chart2.Series["Series1"].Points.Clear();
-            chart(image,1);
-            chart(f_image,2);
+            chart(image, 1);
+            chart(f_image, 2);
         }
 
         private void ContrastStretching_Click(object sender, EventArgs e)
@@ -124,6 +124,7 @@ namespace Assingment_one
 
                 }
             }
+
             R = max - min;
 
             for (int i = 0; i < f_image.Width; i++)
@@ -152,8 +153,8 @@ namespace Assingment_one
             pictureBox2.Image = image;
             this.chart1.Series["Series1"].Points.Clear();
             this.chart2.Series["Series1"].Points.Clear();
-            chart(image,1);
-            chart(f_image,2);
+            chart(image, 1);
+            chart(f_image, 2);
         }
 
         private void Vertical()
@@ -171,7 +172,7 @@ namespace Assingment_one
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
                     y = (-i * 1) + (j * 0);
                     x = (i * 0) + (j * 1);
-                    y = (f_image.Width-1) + y;
+                    y = (f_image.Width - 1) + y;
                     arr[y, x] = C_gray;
 
                     //image.SetPixel(i, j, Color.FromArgb(c, c, c));
@@ -192,7 +193,7 @@ namespace Assingment_one
                     image.SetPixel(i, j, Color.FromArgb(arr[i, j], arr[i, j], arr[i, j]));
 
                 }
-                          
+
 
             }
             pictureBox2.Image = image;
@@ -206,6 +207,12 @@ namespace Assingment_one
         private void button1_Click(object sender, EventArgs e)
         {
             int c = 0;
+            double a = Convert.ToDouble(textBox2.Text);
+            //search min.max
+            int max = 0;
+            int min = 255;
+            int R = 0;
+            int p = 0;
             for (int i = 0; i < f_image.Width; i++)
             {
                 for (int j = 0; j < f_image.Height; j++)
@@ -213,15 +220,41 @@ namespace Assingment_one
 
                     Color PixelColor = f_image.GetPixel(i, j);
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    if (C_gray > max)
+                    {
+                        max = C_gray;
+                    }
+                    else if (C_gray < min)
+                    {
+                        min = C_gray;
+                    }
 
-                    c = (int)(Math.Abs(C_gray - Math.Pow(C_gray, 1.5)));
+                }
+            }
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    //C_gray = ((C_gray - min) / (max - min)) * 255;
+                    //  C_gray = C_gray + 255 / 2;
+                    //c = (int)(Math.Abs(C_gray - Math.Pow(C_gray, 1.5)));
+                    //c = (int)(Math.Abs(255 *Math.Pow(C_gray / 255, 5)));
                     //c = (int)(1*Math.Log(1 + C_gray));
-
+                    c = (int)(Math.Pow(C_gray, 1/a ));
+                    //c = c - min;
+                    //c = 255 * c / max;
                     if (c >= 255)
                         c = 255;
+                    //if (c < min)
+                    //    c = c + 255 / 2;
+                    //c = c + 255 / 2;
+                    //c = ((c - min) / (max - min)) * 255;
 
-                     image.SetPixel(i, j, Color.FromArgb(c, c, c));
-                    
+                    image.SetPixel(i, j, Color.FromArgb(c, c, c));
+
                 }
             }
 
@@ -229,8 +262,8 @@ namespace Assingment_one
             pictureBox2.Image = image;
             this.chart1.Series["Series1"].Points.Clear();
             this.chart2.Series["Series1"].Points.Clear();
-            chart(image,1);
-            chart(f_image,2);
+            chart(image, 1);
+            chart(f_image, 2);
 
 
         }
@@ -265,8 +298,8 @@ namespace Assingment_one
 
             for (int i = 0; i < arrCo.Length; i++)
             {
-                if(i!=0)
-                    arrCo[i] = arrCo[i] + arrCo[i-1];
+                if (i != 0)
+                    arrCo[i] = arrCo[i] + arrCo[i - 1];
             }
 
             for (int i = 0; i < arrCo.Length; i++)
@@ -311,7 +344,7 @@ namespace Assingment_one
             //Rotation270();
             Rotation90();
             //aaa();
-            rr +=1;
+            rr += 1;
         }
 
         public void Rotation90()
@@ -329,7 +362,7 @@ namespace Assingment_one
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
                     y = (i * 1) + (j * 0);
                     x = (i * 0) + (-j * 1);
-                   // y = (f_image.Width - 1) + y;
+                    // y = (f_image.Width - 1) + y;
                     x = (f_image.Width - 1) + x;
                     arr[x, y] = C_gray;
 
@@ -408,7 +441,7 @@ namespace Assingment_one
         }
 
 
-        public void chart(Bitmap image,int c)
+        public void chart(Bitmap image, int c)
         {
             int[] arrCo = new int[255];
             int[] arrNco = new int[255];
@@ -440,8 +473,8 @@ namespace Assingment_one
                     this.chart2.Series["Series1"].Points.AddXY(i, arrCo[i]);
                 }
             }
-           // this.chart1.Series["Series1"].Points.Clear();
-           // this.chart2.Series["Series1"].Points.Clear();
+            // this.chart1.Series["Series1"].Points.Clear();
+            // this.chart2.Series["Series1"].Points.Clear();
             arrCo = null;
             arrNco = null;
 
