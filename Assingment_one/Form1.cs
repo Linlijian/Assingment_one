@@ -66,14 +66,14 @@ namespace Assingment_one
                     Color PixelColor = f_image.GetPixel(i, j);
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
                     avg += C_gray;
-                    sum += 1;
+                    //sum += 1;
 
                     //check color
                     lastC = C_gray;
 
                 }
             }
-            int tmp = avg / sum;
+            int tmp = avg / (f_image.Width*f_image.Height);
             for (int i = 0; i < f_image.Width; i++)
             {
                 for (int j = 0; j < f_image.Height; j++)
@@ -276,8 +276,8 @@ namespace Assingment_one
         private void HIT_Click(object sender, EventArgs e)
         {
 
-            int[] arrCo = new int[255];
-            double[] arrNco = new double[255];
+            int[] arrCo = new int[256];
+            double[] arrNco = new double[256];
 
             double a = 0;
             double max = f_image.Width * f_image.Height;
