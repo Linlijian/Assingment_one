@@ -48,6 +48,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.ro90 = new System.Windows.Forms.Button();
             this.ro270 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -183,7 +184,7 @@
             this.ro90.Name = "ro90";
             this.ro90.Size = new System.Drawing.Size(75, 23);
             this.ro90.TabIndex = 12;
-            this.ro90.Text = "90";
+            this.ro90.Text = "270";
             this.ro90.UseVisualStyleBackColor = true;
             this.ro90.Click += new System.EventHandler(this.ro90_Click);
             // 
@@ -193,15 +194,23 @@
             this.ro270.Name = "ro270";
             this.ro270.Size = new System.Drawing.Size(75, 23);
             this.ro270.TabIndex = 13;
-            this.ro270.Text = "270";
+            this.ro270.Text = "90";
             this.ro270.UseVisualStyleBackColor = true;
             this.ro270.Click += new System.EventHandler(this.ro270_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(288, 345);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 14;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(842, 746);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.ro270);
             this.Controls.Add(this.ro90);
             this.Controls.Add(this.button1);
@@ -243,6 +252,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button ro90;
         private System.Windows.Forms.Button ro270;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 

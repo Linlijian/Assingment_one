@@ -54,7 +54,6 @@ namespace Assingment_one
         {
             //threshold
             int avg = 0;
-            int sum = 0;
             int lastC = 0;
 
             // Loop through the images pixels
@@ -66,14 +65,13 @@ namespace Assingment_one
                     Color PixelColor = f_image.GetPixel(i, j);
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
                     avg += C_gray;
-                    //sum += 1;
-
+                    
                     //check color
                     lastC = C_gray;
 
                 }
             }
-            int tmp = avg / (f_image.Width*f_image.Height);
+            int tmp = avg / (f_image.Width * f_image.Height);
             for (int i = 0; i < f_image.Width; i++)
             {
                 for (int j = 0; j < f_image.Height; j++)
@@ -184,12 +182,6 @@ namespace Assingment_one
             {
                 for (int j = 0; j < f_image.Height; j++)
                 {
-
-
-
-
-
-
                     image.SetPixel(i, j, Color.FromArgb(arr[i, j], arr[i, j], arr[i, j]));
 
                 }
@@ -206,64 +198,65 @@ namespace Assingment_one
         //POW_LAW
         private void button1_Click(object sender, EventArgs e)
         {
-            int c = 0;
-            double a = Convert.ToDouble(textBox2.Text);
-            //search min.max
-            int max = 0;
-            int min = 255;
-            int R = 0;
-            int p = 0;
-            for (int i = 0; i < f_image.Width; i++)
-            {
-                for (int j = 0; j < f_image.Height; j++)
-                {
+            Pow_law();
+            //int c = 0;
+            //double a = Convert.ToDouble(textBox2.Text);
+            ////search min.max
+            //int max = 0;
+            //int min = 255;
+            //int R = 0;
+            //int p = 0;
+            //for (int i = 0; i < f_image.Width; i++)
+            //{
+            //    for (int j = 0; j < f_image.Height; j++)
+            //    {
 
-                    Color PixelColor = f_image.GetPixel(i, j);
-                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
-                    if (C_gray > max)
-                    {
-                        max = C_gray;
-                    }
-                    else if (C_gray < min)
-                    {
-                        min = C_gray;
-                    }
+            //        Color PixelColor = f_image.GetPixel(i, j);
+            //        int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+            //        if (C_gray > max)
+            //        {
+            //            max = C_gray;
+            //        }
+            //        else if (C_gray < min)
+            //        {
+            //            min = C_gray;
+            //        }
 
-                }
-            }
-            for (int i = 0; i < f_image.Width; i++)
-            {
-                for (int j = 0; j < f_image.Height; j++)
-                {
+            //    }
+            //}
+            //for (int i = 0; i < f_image.Width; i++)
+            //{
+            //    for (int j = 0; j < f_image.Height; j++)
+            //    {
 
-                    Color PixelColor = f_image.GetPixel(i, j);
-                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
-                    //C_gray = ((C_gray - min) / (max - min)) * 255;
-                    //  C_gray = C_gray + 255 / 2;
-                    //c = (int)(Math.Abs(C_gray - Math.Pow(C_gray, 1.5)));
-                    //c = (int)(Math.Abs(255 *Math.Pow(C_gray / 255, 5)));
-                    //c = (int)(1*Math.Log(1 + C_gray));
-                    c = (int)(Math.Pow(C_gray, 1/a ));
-                    //c = c - min;
-                    //c = 255 * c / max;
-                    if (c >= 255)
-                        c = 255;
-                    //if (c < min)
-                    //    c = c + 255 / 2;
-                    //c = c + 255 / 2;
-                    //c = ((c - min) / (max - min)) * 255;
+            //        Color PixelColor = f_image.GetPixel(i, j);
+            //        int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+            //        //C_gray = ((C_gray - min) / (max - min)) * 255;
+            //        //  C_gray = C_gray + 255 / 2;
+            //        //c = (int)(Math.Abs(C_gray - Math.Pow(C_gray, 1.5)));
+            //        //c = (int)(Math.Abs(255 *Math.Pow(C_gray / 255, 5)));
+            //        //c = (int)(1*Math.Log(1 + C_gray));
+            //        c = (int)(Math.Pow(C_gray, 1 / a));
+            //        //c = c - min;
+            //        //c = 255 * c / max;
+            //        if (c >= 255)
+            //            c = 255;
+            //        //if (c < min)
+            //        //    c = c + 255 / 2;
+            //        //c = c + 255 / 2;
+            //        //c = ((c - min) / (max - min)) * 255;
 
-                    image.SetPixel(i, j, Color.FromArgb(c, c, c));
+            //        image.SetPixel(i, j, Color.FromArgb(c, c, c));
 
-                }
-            }
+            //    }
+            //}
 
-            textBox1.Text = c.ToString();
-            pictureBox2.Image = image;
-            this.chart1.Series["Series1"].Points.Clear();
-            this.chart2.Series["Series1"].Points.Clear();
-            chart(image, 1);
-            chart(f_image, 2);
+            //textBox1.Text = c.ToString();
+            //pictureBox2.Image = image;
+            //this.chart1.Series["Series1"].Points.Clear();
+            //this.chart2.Series["Series1"].Points.Clear();
+            //chart(image, 1);
+            //chart(f_image, 2);
 
 
         }
@@ -335,16 +328,10 @@ namespace Assingment_one
             chart(f_image, 2);
             pictureBox2.Image = image;
         }
-        int rr = 1;
+        
         private void button1_Click_1(object sender, EventArgs e)
         {
-
-
-            //Vertical();
-            //Rotation270();
-            Rotation90();
-            //aaa();
-            rr += 1;
+            //Pow_law();
         }
 
         public void Rotation90()
@@ -357,17 +344,12 @@ namespace Assingment_one
             {
                 for (int j = 0; j < f_image.Height; j++)
                 {
-
                     Color PixelColor = f_image.GetPixel(i, j);
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
                     y = (i * 1) + (j * 0);
-                    x = (i * 0) + (-j * 1);
-                    // y = (f_image.Width - 1) + y;
+                    x = (i * 0) + (-j * 1);                  
                     x = (f_image.Width - 1) + x;
                     arr[x, y] = C_gray;
-
-                    //image.SetPixel(i, j, Color.FromArgb(c, c, c));
-
                 }
             }
 
@@ -375,14 +357,8 @@ namespace Assingment_one
             {
                 for (int j = 0; j < f_image.Height; j++)
                 {
-
-
-
-
-
                     image.SetPixel(i, j, Color.FromArgb(arr[i, j], arr[i, j], arr[i, j]));
-                    //image.SetPixel(i, j, Color.FromArgb(arr[j, i], arr[j, i], arr[j, i]));
-
+                    
                 }
 
 
@@ -410,9 +386,7 @@ namespace Assingment_one
                     y = (-i * 1) + (j * 0);
                     x = (i * 0) + (j * 1);
                     y = (f_image.Width - 1) + y;
-                    arr[y, x] = C_gray;
-
-                    //image.SetPixel(i, j, Color.FromArgb(c, c, c));
+                    arr[y, x] = C_gray;                    
 
                 }
             }
@@ -421,12 +395,6 @@ namespace Assingment_one
             {
                 for (int j = 0; j < f_image.Height; j++)
                 {
-
-
-
-
-
-
                     image.SetPixel(i, j, Color.FromArgb(arr[j, i], arr[j, i], arr[j, i]));
 
                 }
@@ -473,39 +441,75 @@ namespace Assingment_one
                     this.chart2.Series["Series1"].Points.AddXY(i, arrCo[i]);
                 }
             }
-            // this.chart1.Series["Series1"].Points.Clear();
-            // this.chart2.Series["Series1"].Points.Clear();
             arrCo = null;
             arrNco = null;
 
         }
-        public void aaa()
-        {
-
-            for (int y = 0; y < f_image.Width; y++)
-            {
-                for (int x = 0; x < f_image.Height; x++)
-                {
-
-                    Color PixelColor = f_image.GetPixel(y, x);
-                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
-                    // arrCo[xy] = C_gray;
-                    image.SetPixel(x, y, Color.FromArgb(C_gray, C_gray, C_gray));
-                    // image.SetPixel(i, j, Color.FromArgb(0, 0, 0));
-                    //xy++;
-                }
-            }
-            pictureBox2.Image = image;
-        }
 
         private void ro90_Click(object sender, EventArgs e)
         {
-            Rotation90();
+            Rotation270();
         }
 
         private void ro270_Click(object sender, EventArgs e)
         {
-            Rotation270();
+            Rotation90();
+        }
+
+        public void Pow_law()
+        {
+            int c = 0;
+            int[] arr = new int[f_image.Height * f_image.Width];
+            double a = Convert.ToDouble(textBox2.Text);
+            int max = 0;
+            int min = 255;
+            int p = 0;
+
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+
+                    arr[p] = (int)(Math.Pow(C_gray, a));
+                    if (arr[p] > max)
+                    {
+                        max = arr[p];
+                    }
+                    else if (arr[p] < min)
+                    {
+                        min = arr[p];
+                    }
+                    //image.SetPixel(i, j, Color.FromArgb(arr[p], arr[p], arr[p]));
+                    p++;
+
+                }
+            }
+
+
+            p = 0;
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
+
+
+                    c = (arr[p] * 255 / max);                    if (c < 0)
+                        c = c * -1;
+                    p++;
+                    image.SetPixel(i, j, Color.FromArgb(c, c, c));
+
+                }
+            }
+            textBox1.Text = min.ToString();
+            textBox3.Text = max.ToString();
+            pictureBox2.Image = image;
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image, 1);
+            chart(f_image, 2);
         }
     }
 }
