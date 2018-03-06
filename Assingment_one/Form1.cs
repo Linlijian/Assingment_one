@@ -95,8 +95,48 @@ namespace Assingment_one
             this.chart2.Series["Series1"].Points.Clear();
             chart(image, 1);
             chart(f_image, 2);
+            textBox1.Text = tmp.ToString();
         }
+        public void Con_Stre()
+        {
+            int p = 0;
+            for (int i = 0; i < f_image.Width; i++)
+            {
+                for (int j = 0; j < f_image.Height; j++)
+                {
 
+                    Color PixelColor = f_image.GetPixel(i, j);
+                    int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
+                    p = Calslope(C_gray);
+                    image.SetPixel(i, j, Color.FromArgb(p, p, p));
+
+                }
+            }
+            pictureBox2.Image = image;
+          
+            this.chart1.Series["Series1"].Points.Clear();
+            this.chart2.Series["Series1"].Points.Clear();
+            chart(image, 1);
+            chart(f_image, 2);
+        }
+        public int Calslope(int m)
+        {
+            if(m >= 200)
+            {
+                return m = (Math.Abs(((150 - m) / 200) - 200));
+            }
+            else if(m <=100)
+            {
+                return 0;
+            }
+            else
+            {
+                return m = Math.Abs(((100 - m) / 50) - 50);
+                
+            }
+           
+            
+        }
         private void ContrastStretching_Click(object sender, EventArgs e)
         {
             //search min.max
@@ -132,13 +172,13 @@ namespace Assingment_one
 
                     Color PixelColor = f_image.GetPixel(i, j);
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
-                    if (C_gray <= min)
+                    if (C_gray <= 100)
                     {
                         image.SetPixel(i, j, Color.FromArgb(0, 0, 0));
                     }
-                    else if (C_gray >= max)
+                    else if (C_gray >= 200)
                     {
-                        image.SetPixel(i, j, Color.FromArgb(max, max, max));
+                        image.SetPixel(i, j, Color.FromArgb(255, 255, 255));
                     }
                     else
                     {
@@ -149,6 +189,8 @@ namespace Assingment_one
             }
 
             pictureBox2.Image = image;
+            textBox1.Text = min.ToString();
+            textBox2.Text = max.ToString();
             this.chart1.Series["Series1"].Points.Clear();
             this.chart2.Series["Series1"].Points.Clear();
             chart(image, 1);
@@ -332,6 +374,7 @@ namespace Assingment_one
         private void button1_Click_1(object sender, EventArgs e)
         {
             //Pow_law();
+            Con_Stre();
         }
 
         public void Rotation90()
@@ -496,7 +539,8 @@ namespace Assingment_one
                 {
 
 
-                    c = (arr[p] * 255 / max);                    if (c < 0)
+                    c = (arr[p] * 255 / max);
+                    if (c < 0)
                         c = c * -1;
                     p++;
                     image.SetPixel(i, j, Color.FromArgb(c, c, c));
