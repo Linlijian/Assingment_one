@@ -107,8 +107,8 @@ namespace Assingment_one
 
                     Color PixelColor = f_image.GetPixel(i, j);
                     int C_gray = (int)(PixelColor.R + PixelColor.G + PixelColor.B) / 3;
-                    p = Calslope(C_gray);
-                    //p = Calslope2(C_gray);
+                    //p = Calslope(C_gray);
+                    p = Calslope2(C_gray);
                     image.SetPixel(i, j, Color.FromArgb(p, p, p));
 
                 }
@@ -148,26 +148,28 @@ namespace Assingment_one
         }
         public int Calslope2(int m)
         {
-            if (m >= 150)
+            if (m > 150)
             {
                 // return m = (105 * m) / 55 - 50;
-                return m = (m - 150) * ((255 / (255 - 150)) + 0);
+                //return m = (m - 150) * ((255 / (255 - 150)) + 0);
                 //return m = (105 * m - 50) / 55;
+                return m = ((55 / 105) * m) + (255 - ((55 / 105) * 255));
             }
-            else if (m <= 100)
+            else if (m >= 100)
             {
                 //return m = (50 / 150) * m + 50;
                 //return m = (50 * m) / 150 + 100;
                 //return m = (50 * m + 100) / 150;
                 //return m = (50 * m - 100) / 150;
-                return m = (m - 0) * ((100 / (100 - 0)) + 0);
+                //return m = (m - 0) * ((100 / (100 - 0)) + 0);
+                return m = ((150 / 50) * m) + (200 - ((150 / 50) * 150));
             }
             else
             {
                 //return m = m * 2;
                 //return m = (255 *( m - 255)) / 150;
-                return m = (m - 100) * ((255 / (150 - 100)) + 0);
-
+                //return m = (m - 100) * ((255 / (150 - 100)) + 0);
+                return m = ((50 / 100) * m) + (50 - ((50 / 100) * 100));
             }
 
 
