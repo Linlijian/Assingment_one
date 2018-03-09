@@ -148,12 +148,13 @@ namespace Assingment_one
         }
         public int Calslope2(int m)
         {
-            if (m > 150)
+            if (m >= 150)
             {
                 // return m = (105 * m) / 55 - 50;
                 //return m = (m - 150) * ((255 / (255 - 150)) + 0);
                 //return m = (105 * m - 50) / 55;
-                return m = ((55 / 105) * m) + (255 - ((55 / 105) * 255));
+                int m150 = (int)(55 / 105);
+                return m = (int)(0.524 * m + 121.38);
             }
             else if (m >= 100)
             {
@@ -162,14 +163,17 @@ namespace Assingment_one
                 //return m = (50 * m + 100) / 150;
                 //return m = (50 * m - 100) / 150;
                 //return m = (m - 0) * ((100 / (100 - 0)) + 0);
-                return m = ((150 / 50) * m) + (200 - ((150 / 50) * 150));
+                int m100 = (int)(150 / 50);
+                return m = 3 * m - 250;
             }
             else
             {
                 //return m = m * 2;
                 //return m = (255 *( m - 255)) / 150;
                 //return m = (m - 100) * ((255 / (150 - 100)) + 0);
-                return m = ((50 / 100) * m) + (50 - ((50 / 100) * 100));
+                int m50 = (int)(50 / 100);
+                //return m = (m50 * m) + (50 - (m50 * 100));
+                return m = (int)(0.5 * m);
             }
 
 
